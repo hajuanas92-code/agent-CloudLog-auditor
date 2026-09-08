@@ -1,13 +1,13 @@
 import os
 from dotenv import load_dotenv
-import google.cloud.logging
 from google.cloud.logging_v2 import DESCENDING
+from gcp_client import get_logging_client
 
 load_dotenv()
 
 PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 
-client = google.cloud.logging.Client(project=PROJECT_ID)
+client = get_logging_client()
 
 
 def get_latest_error_log():
