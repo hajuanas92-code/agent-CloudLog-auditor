@@ -46,13 +46,13 @@ if st.button("Check for latest error"):
     with st.spinner("Checking Cloud Logging for errors..."):
         latest_log = get_latest_error_log()
 
-
-    latest_log = get_latest_error_log()
-
     if latest_log is None:
         st.warning("No error logs found.")
     else:
         st.session_state["latest_log"] = latest_log
+        # Clear out any previous diagnosis so it doesn't show stale data
+        for key in ["fixed_code", "root_cause", "explanation", "original_code", "pr_url"]:
+            st.session_state.pop(key, None)
         st.success("Error found!")
 
 if "latest_log" in st.session_state:
