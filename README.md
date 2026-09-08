@@ -43,7 +43,7 @@ It stops short of merging code on its own — it proposes a PR, the same way a h
 
 - ☁️ **Google Cloud Logging** — error detection
 - 🐙 **GitHub API (PyGithub)** — fetching source code, creating branches, opening PRs
-- ⚡ **Groq (Llama 3.3)** — diagnosis and fix generation
+- ⚡ **Groq** — diagnosis and fix generation
 - 🎨 **Streamlit** — dashboard UI
 - 🗄️ **SQLite** — local history of past fixes
 - 🐍 **Python** end to end
@@ -81,7 +81,7 @@ It stops short of merging code on its own — it proposes a PR, the same way a h
 
 ```bash
 # clone the repo
-git clone <your-repo-url>
+git clone https://github.com/hajuanas92-code/agent-CloudLog-auditor.git
 cd agent-auditor
 
 # install dependencies with uv
