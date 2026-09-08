@@ -13,8 +13,8 @@ def get_logging_client():
     """
     try:
         import streamlit as st
-        if "gcp_service_account" in st.secrets:
-            credentials_dict = dict(st.secrets["gcp_service_account"])
+        if "GCP_SERVICE_ACCOUNT_JSON" in st.secrets:
+            credentials_dict = json.loads(st.secrets["GCP_SERVICE_ACCOUNT_JSON"])
             credentials = service_account.Credentials.from_service_account_info(
                 credentials_dict
             )
