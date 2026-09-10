@@ -1,6 +1,11 @@
-# ☁️ Cloud Log Auditor
+# ☁️ CIEARA
 
-> **An autonomous agent that detects production errors, diagnoses their root cause with AI, and proposes a fix as a pull request — with human approval before anything is written to your codebase.**
+> **An AI agent that turns production crashes into reviewed pull requests — automatically.**
+
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![Status](https://img.shields.io/badge/Status-Prototype-yellow)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
@@ -14,9 +19,9 @@ This is slow, repetitive, and pulls engineers away from other work — especiall
 
 ---
 
-## ✨ What This Does
+## ✨ What CIEARA Does
 
-Cloud Log Auditor automates that entire loop, end to end:
+CIEARA automates that entire loop, end to end:
 
 | Step | Action |
 |------|--------|
@@ -31,7 +36,7 @@ Cloud Log Auditor automates that entire loop, end to end:
 
 ## 🛡️ Why the Approval Step Matters
 
-This agent is **deliberately not fully autonomous end-to-end.**
+CIEARA is **deliberately not fully autonomous end-to-end.**
 
 It stops short of merging code on its own — it proposes a PR, the same way a human contributor would, so an engineer always stays in control of what actually reaches production.
 
@@ -54,7 +59,7 @@ It stops short of merging code on its own — it proposes a PR, the same way a h
 
 ```
 ┌─────────────────────────────────────────────┐
-│  ☁️ Cloud Log Auditor                        │
+│  ☁️ CIEARA                                   │
 │                                               │
 │  Monitoring: your-gcp-project                │
 │  Repository: your-username/your-repo         │
@@ -81,7 +86,7 @@ It stops short of merging code on its own — it proposes a PR, the same way a h
 
 ```bash
 # clone the repo
-git clone https://github.com/hajuanas92-code/agent-CloudLog-auditor.git
+git clone <your-repo-url>
 cd agent-auditor
 
 # install dependencies with uv
@@ -101,9 +106,29 @@ uv run streamlit run app.py
 
 ---
 
+## 🧪 Test Repository
+
+CIEARA was demonstrated against a small sample app with two deliberately introduced bugs (a database connection failure and a missing environment variable):
+
+[![Test Repo](https://img.shields.io/badge/Test%20Repo-test--log--auditor-blueviolet?logo=github)](https://github.com/hajuanas92-code/test-log-auditor)
+
+Clone it, run `python bug.py db` or `python bug.py api` to trigger an error, and point CIEARA's `.env` (`GITHUB_REPO`, `TARGET_FILE`) at your fork to reproduce the full pipeline yourself.
+
+---
+
 ## 💡 Why This Matters
 
-This isn't just a script — it's a working prototype of a category of tool that real engineering teams already pay for (Sentry, Rootly, incident.io, and the broader "AIOps" space). Most existing tools stop at *alerting*; this one goes a step further and proposes an actual fix, while keeping a human firmly in the loop before anything reaches your codebase.
+CIEARA isn't just a script — it's a working prototype of a category of tool that real engineering teams already pay for (Sentry, Rootly, incident.io, and the broader "AIOps" space). Most existing tools stop at *alerting*; CIEARA goes a step further and proposes an actual fix, while keeping a human firmly in the loop before anything reaches your codebase.
+
+---
+
+## 🔮 What's Next for CIEARA
+
+- **Continuous monitoring**: right now CIEARA checks for errors on demand; the next step is a background polling loop so it truly watches logs in real time without a manual click.
+- **Multi-repo support**: currently CIEARA is configured to watch a single GCP project and GitHub repository; extending this to a mapping of multiple services to their respective repos would make it usable across a real team's infrastructure.
+- **Post-merge verification**: after a fix is merged, CIEARA could automatically recheck Cloud Logging to confirm the original error has actually stopped occurring, closing the loop completely.
+- **Broader bug coverage**: expanding to more error categories (data validation, timeout handling, malformed input) would strengthen its general-purpose claim.
+- **Packaging as an installable SDK**: a small pip-installable library could handle error capture automatically for any Python (and eventually other language) codebase.
 
 ---
 
